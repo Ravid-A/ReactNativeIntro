@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, TextInput, Button } from "react-native";
+import { View, TextInput, Button, Text } from "react-native";
 
 import { faker } from "@faker-js/faker";
 import colorHash from "../utils/colorHash";
@@ -38,7 +38,7 @@ const CreateUserScreen = () => {
   };
 
   const generateFakeUser = () => {
-    const randomAge = Math.floor(Math.random() * 100)
+    const randomAge = Math.floor(Math.random() * 100 + 1)
       .toFixed()
       .toString();
 
@@ -63,6 +63,33 @@ const CreateUserScreen = () => {
 
   return (
     <View style={styles.container}>
+      <View
+        style={[
+          styles.avatar,
+          {
+            backgroundColor: colorHash(email).hex,
+            borderColor: "black",
+            borderWidth: 2,
+            width: 150,
+            height: 150,
+            borderRadius: 80,
+            marginBottom: 18,
+          },
+        ]}
+      >
+        <Text
+          style={[
+            styles.avatarText,
+            {
+              fontSize: 40,
+            },
+          ]}
+        >
+          {name.charAt(0)}
+          {lastName.charAt(0)}
+        </Text>
+      </View>
+
       <TextInput
         style={styles.input}
         placeholder="Name"
