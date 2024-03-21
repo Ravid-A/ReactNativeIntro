@@ -19,6 +19,10 @@ const CreateUserScreen = () => {
   const [email, setEmail] = useState("");
 
   const handleCreateUser = () => {
+    if (!name || !lastName || !age || !gender || !email) {
+      return;
+    }
+
     const avatarColor = colorHash(email);
 
     const newUser = {
