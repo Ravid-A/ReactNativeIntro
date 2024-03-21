@@ -1,20 +1,44 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-export default function App() {
+import CreateUserScreen from "./components/CreateUserScreen";
+import UserListScreen from "./components/UserListScreen";
+import UserDetailsScreen from "./components/UserDetailsScreen";
+
+import { UserProvider } from "./context/UserContext";
+
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+const UserStack = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Users"
+        component={UserListScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Details"
+        component={UserDetailsScreen}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const App = () => {
+  return (
+    <UserProvider>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Create User" component={CreateUserScreen} />
+          <Tab.Screen name="User List" component={UserStack} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </UserProvider>
+  );
+};
+
+export default App;
