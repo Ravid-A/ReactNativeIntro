@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 12,
     paddingHorizontal: 8,
+    backgroundColor: "white",
   },
   userItem: {
     flexDirection: "row",
@@ -43,6 +44,14 @@ const styles = StyleSheet.create({
   },
   userEmail: {
     color: "#666",
+  },
+  dropdownPicker: {
+    width: "auto",
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 20,
+    backgroundColor: "white",
   },
 });
 

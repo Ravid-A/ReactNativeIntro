@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { View, TextInput, Button, Text } from "react-native";
+import DropDownPicker from "react-native-dropdown-picker";
 
 import { faker } from "@faker-js/faker";
 import colorHash from "../utils/colorHash";
@@ -18,6 +19,8 @@ const CreateUserScreen = () => {
   const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
   const [avatarColor, setAvatarColor] = useState("rgb(255,255,255)");
+
+  const [open, setOpen] = useState(false);
 
   const handleCreateUser = () => {
     if (!name || !lastName || !age || !gender || !email) {
@@ -116,12 +119,6 @@ const CreateUserScreen = () => {
       />
       <TextInput
         style={styles.input}
-        placeholder="Gender"
-        value={gender}
-        onChangeText={setGender}
-      />
-      <TextInput
-        style={styles.input}
         placeholder="Email"
         value={email}
         onChangeText={(text) => {
@@ -130,6 +127,30 @@ const CreateUserScreen = () => {
         }}
         keyboardType="email-address"
       />
+
+      <DropDownPicker
+        open={open}
+        value={gender}
+        items={[
+          { label: "Male", value: "male" },
+          { label: "Female", value: "female" },
+        ]}
+        setOpen={setOpen}
+        setValue={setGender}
+        style={styles.dropdownPicker}
+        dropDownContainerStyle={{
+          borderColor: "gray",
+          borderWidth: 1,
+        }}
+        placeholderStyle={{
+          color: "gray",
+        }}
+        textStyle={{
+          color: "black",
+        }}
+        placeholder="Select Gender"
+      />
+
       <Button title="Create User" onPress={handleCreateUser} />
       <Button title="Generate Fake User" onPress={generateFakeUser} />
     </View>
