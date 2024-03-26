@@ -17,13 +17,12 @@ const CreateUserScreen = () => {
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
+  const [avatarColor, setAvatarColor] = useState("rgb(255,255,255)");
 
   const handleCreateUser = () => {
     if (!name || !lastName || !age || !gender || !email) {
       return;
     }
-
-    const avatarColor = colorHash(email);
 
     const newUser = {
       name,
@@ -31,7 +30,7 @@ const CreateUserScreen = () => {
       age,
       gender,
       email,
-      avatarColor: avatarColor,
+      avatarColor,
     };
     setUsers([...users, newUser]);
     setName("");
@@ -39,6 +38,7 @@ const CreateUserScreen = () => {
     setAge("");
     setGender("");
     setEmail("");
+    setAvatarColor("rgb(255,255,255)");
   };
 
   const generateFakeUser = () => {
@@ -53,16 +53,17 @@ const CreateUserScreen = () => {
       gender: faker.person.sex(),
     };
 
+    fakeUser.email = faker.internet.email({
+      firstName: fakeUser.name,
+      lastName: fakeUser.lastName,
+    });
+
     setName(fakeUser.name);
     setLastName(fakeUser.lastName);
     setAge(fakeUser.age);
     setGender(fakeUser.gender);
-    setEmail(
-      faker.internet.email({
-        firstName: fakeUser.name,
-        lastName: fakeUser.lastName,
-      })
-    );
+    setEmail(fakeUser.email);
+    setAvatarColor(colorHash(fakeUser.email).rgb);
   };
 
   return (
@@ -71,7 +72,7 @@ const CreateUserScreen = () => {
         style={[
           styles.avatar,
           {
-            backgroundColor: colorHash(email).hex,
+            backgroundColor: avatarColor,
             borderColor: "black",
             borderWidth: 2,
             width: 150,
@@ -123,7 +124,10 @@ const CreateUserScreen = () => {
         style={styles.input}
         placeholder="Email"
         value={email}
-        onChangeText={setEmail}
+        onChangeText={(text) => {
+          setEmail(text);
+          setAvatarColor(colorHash(text).hex);
+        }}
         keyboardType="email-address"
       />
       <Button title="Create User" onPress={handleCreateUser} />

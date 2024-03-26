@@ -10,7 +10,7 @@ const UserDetailsScreen = ({ route, navigation }) => {
         style={[
           styles.avatar,
           {
-            backgroundColor: user.avatarColor.hex,
+            backgroundColor: user.avatarColor,
             borderColor: "black",
             borderWidth: 2,
           },

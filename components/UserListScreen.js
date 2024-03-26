@@ -15,7 +15,7 @@ const UserListScreen = ({ navigation }) => {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.userItem}
-            onPress={() => navigation.navigate("Details", { user: item })}
+            onPress={() => console.log(item)}
           >
             <View
               style={{
@@ -26,7 +26,7 @@ const UserListScreen = ({ navigation }) => {
                 style={[
                   styles.avatar,
                   {
-                    backgroundColor: item.avatarColor.hex,
+                    backgroundColor: item.avatarColor,
                     borderColor: "black",
                     borderWidth: 2,
                   },
