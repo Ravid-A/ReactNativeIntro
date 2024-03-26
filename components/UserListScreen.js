@@ -15,7 +15,7 @@ const UserListScreen = ({ navigation }) => {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.userItem}
-            onPress={() => console.log(item)}
+            onPress={() => navigation.navigate("Details", { user: item })}
           >
             <View
               style={{
