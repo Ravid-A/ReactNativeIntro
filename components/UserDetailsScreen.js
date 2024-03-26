@@ -1,8 +1,14 @@
 import { Button, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import styles from "../styles";
+import { useEffect } from "react";
 
 const UserDetailsScreen = ({ route, navigation }) => {
   const { user } = route.params;
+
+  useEffect(() => {
+    navigation.setOptions({ title: `${user.name} ${user.lastName} Details` });
+  }, []);
 
   return (
     <View style={styles.container}>

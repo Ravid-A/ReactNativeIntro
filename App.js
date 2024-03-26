@@ -19,11 +19,7 @@ const UserStack = () => {
         component={UserListScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="Details"
-        component={UserDetailsScreen}
-        options={{ headerShown: false }}
-      />
+      <Stack.Screen name="Details" component={UserDetailsScreen} />
     </Stack.Navigator>
   );
 };
@@ -34,7 +30,7 @@ const App = () => {
       <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen name="Create User" component={CreateUserScreen} />
-          <Tab.Screen name="User List" component={UserStack} />
+          <Tab.Screen name="Users List" component={UserStack} />
         </Tab.Navigator>
       </NavigationContainer>
     </UserProvider>
